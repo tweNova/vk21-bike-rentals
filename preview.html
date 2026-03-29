@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Himalayan Rides | Motorbike Rentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        adventure: {
+                            bg: '#1B261A',
+                            primary: '#2D4234',
+                            secondary: '#4A6D43',
+                            accent: '#7DA065',
+                            mist: '#E9F0F4',
+                            sage: '#89A38C',
+                            gold: '#FFD700',
+                        },
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1B261A;
+            color: #E9F0F4;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero {
+            height: 400vh;
+            position: relative;
+        }
+
+        .sticky-hero {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.1s ease-out, opacity 0.5s ease;
+        }
+
+        .text-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1B261A;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2D4234;
+            border-radius: 5px;
+        }
+
+        .nav-scrolled {
+            background: rgba(27, 38, 26, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(45, 66, 52, 0.2);
+            padding: 1rem 0;
+        }
+
+        /* Artistic Effects */
+        .spotlight-mask {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 10;
+            background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(27, 38, 26, 0.95) 100%);
+            transition: background 0.1s ease-out;
+        }
+
+        .topo-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0.15;
+            overflow: hidden;
+        }
+
+        .parallax-wrap {
+            transition: transform 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-8">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div
+                    class="w-10 h-10 bg-adventure-accent flex items-center justify-center font-bold text-adventure-bg text-2xl shadow-xl transition-colors">
+                    S</div>
+                <span
+                    class="text-2xl font-black text-adventure-mist uppercase tracking-tighter italic drop-shadow-xl">Siliguri
+                    <span class="text-adventure-accent">Bike Rental</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-10">
+                <a href="#fleet"
+                    class="text-xs uppercase tracking-[0.25em] font-black text-adventure-mist hover:text-adventure-accent transition-all drop-shadow-lg">The
+                    Fleet</a>
+                <a href="#experience"
+                    class="text-xs uppercase tracking-[0.25em] font-black text-adventure-mist hover:text-adventure-accent transition-all drop-shadow-lg">Experience</a>
+                <div class="flex flex-col items-end gap-1">
+                    <button
+                        class="px-8 py-2.5 border-2 border-adventure-accent text-adventure-accent text-xs font-black uppercase tracking-widest hover:bg-adventure-accent hover:text-adventure-bg transition-all shadow-xl">Book
+                        Now</button>
+                    <span class="text-[10px] text-adventure-accent font-bold tracking-[0.2em]">+91-8116915168</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero" id="hero">
+        <div class="sticky-hero">
+            <img src="public/frames/ezgif-frame-001.jpg" alt="Mountains" class="hero-img" id="heroImg">
+            <div class="spotlight-mask" id="spotlight"></div>
+
+            <div class="topo-overlay" id="topo">
+                <svg width="100%" height="100%" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 500 Q 250 400 500 500 T 1000 500" fill="none" stroke="#7DA065" stroke-width="0.5" />
+                    <path d="M0 600 Q 250 500 500 600 T 1000 600" fill="none" stroke="#7DA065" stroke-width="0.5" />
+                    <path d="M0 700 Q 250 600 500 700 T 1000 700" fill="none" stroke="#7DA065" stroke-width="0.5" />
+                    <path d="M0 400 Q 250 300 500 400 T 1000 400" fill="none" stroke="#7DA065" stroke-width="0.5" />
+                </svg>
+            </div>
+
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-adventure-bg/10 to-adventure-bg z-30">
+            </div>
+
+            <div id="section1" class="text-overlay z-40">
+                <div class="text-center px-4 max-w-5xl parallax-wrap" id="section1Content">
+                    <span
+                        class="block text-adventure-accent font-black uppercase tracking-[0.6em] mb-6 drop-shadow-2xl opacity-0 animate-[tracking_1.5s_ease-out_forwards]">Siliguri's
+                        Most Trusted Royal Enfield Specialist</span>
+                    <h1
+                        class="text-6xl md:text-9xl font-black text-adventure-mist mb-8 tracking-tighter uppercase leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+                        Explore <br />
+                        <span class="inline-block parallax-heading">The North</span> <br />
+                        <span class="text-adventure-accent">Bengal Hills</span>
+                    </h1>
+                    <p
+                        class="text-xl md:text-2xl text-adventure-mist font-inter italic max-w-3xl mx-auto drop-shadow-xl leading-relaxed opacity-80">
+                        "One day you will wake up & there won’t be any more time to do the things you’ve always wanted.
+                        <span class="text-adventure-accent font-bold">Do it now.</span>"
+                    </p>
+                </div>
+            </div>
+
+            <div id="section2" class="text-overlay">
+                <div class="max-w-4xl px-8 md:px-24">
+                    <div class="bg-adventure-bg/40 backdrop-blur-sm p-10 border-l-4 border-adventure-accent shadow-2xl">
+                        <h2
+                            class="text-5xl md:text-8xl font-black text-adventure-mist mb-6 leading-none drop-shadow-xl uppercase">
+                            Pure <br />
+                            Exploration</h2>
+                        <p class="text-lg md:text-2xl text-adventure-mist drop-shadow-md">From the dusty trails of Spiti
+                            to the
+                            high-altitude passes of Ladakh, ride the world's highest motorable roads. Higher than
+                            Everest Base Camp.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section3" class="text-overlay">
+                <div class="max-w-4xl text-right px-8 md:px-24 ml-auto">
+                    <div class="bg-adventure-bg/40 backdrop-blur-sm p-10 border-r-4 border-adventure-accent shadow-2xl">
+                        <h2
+                            class="text-5xl md:text-8xl font-black text-adventure-mist mb-6 leading-none drop-shadow-xl uppercase">
+                            Rugged <br />
+                            Reliability</h2>
+                        <p class="text-lg md:text-2xl text-adventure-mist drop-shadow-md">We keep the adventure raw and
+                            original. Experience the wilderness beyond expectation, beyond imagination. The ride of your
+                            life.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section4" class="text-overlay">
+                <div class="text-center px-4">
+                    <h2
+                        class="text-6xl md:text-8xl font-black text-adventure-mist mb-10 leading-tight drop-shadow-2xl uppercase">
+                        Your Epic <br />
+                        Starts Here</h2>
+                    <button
+                        class="px-16 py-6 bg-adventure-accent text-adventure-bg rounded-none text-2xl font-black uppercase tracking-widest pointer-events-auto shadow-2xl hover:bg-adventure-mist hover:tracking-[0.5em] transition-all">Explore
+                        Fleet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory -->
+    <section id="fleet" class="py-32 px-4 md:px-8 bg-adventure-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <span class="text-adventure-accent font-bold uppercase tracking-[0.5em] text-xs mb-4 block">Our
+                    Fleet</span>
+                <h2 class="text-6xl md:text-8xl font-bold text-adventure-mist">Signature Rides</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Classic 350 -->
+                <div
+                    class="bg-adventure-primary/20 border border-adventure-primary/30 p-4 hover:border-adventure-accent transition-all duration-500">
+                    <div class="aspect-[4/3] bg-black mb-6">
+                        <img src="public/bikes/himalayan-450.jpg" alt="Classic 350" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-adventure-mist mb-2 uppercase">Classic 350 (New Gen)</h3>
+                    <p class="text-sm text-adventure-sage mb-6 italic">Timeless comfort and iconic thump.</p>
+                    <div class="flex items-end justify-between border-t border-adventure-primary/30 pt-4">
+                        <span class="text-2xl font-bold text-adventure-accent">Rs. 1,500/day</span>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 text-adventure-mist font-bold uppercase text-xs tracking-widest">
+                        Book Now</button>
+                </div>
+                <!-- Hunter 350 -->
+                <div
+                    class="bg-adventure-primary/20 border border-adventure-primary/30 p-4 hover:border-adventure-accent transition-all duration-500">
+                    <div class="aspect-[4/3] bg-black mb-6">
+                        <img src="public/bikes/scram-411.jpg" alt="Hunter 350" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-adventure-mist mb-2 uppercase">Hunter 350</h3>
+                    <p class="text-sm text-adventure-sage mb-6 italic">Agile urban scrambler for the hills.</p>
+                    <div class="flex items-end justify-between border-t border-adventure-primary/30 pt-4">
+                        <span class="text-2xl font-bold text-adventure-accent">Rs. 1,300/day</span>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 text-adventure-mist font-bold uppercase text-xs tracking-widest">
+                        Book Now</button>
+                </div>
+                <!-- Himalayan -->
+                <div
+                    class="bg-adventure-primary/20 border border-adventure-primary/30 p-4 hover:border-adventure-accent transition-all duration-500">
+                    <div class="aspect-[4/3] bg-black mb-6">
+                        <img src="public/bikes/himalayan-450.jpg" alt="Himalayan" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-adventure-mist mb-2 uppercase">Royal Enfield Himalayan</h3>
+                    <p class="text-sm text-adventure-sage mb-6 italic">Built for all roads. Built for no roads.</p>
+                    <div class="flex items-end justify-between border-t border-adventure-primary/30 pt-4">
+                        <span class="text-2xl font-bold text-adventure-accent">Rs. 1,800/day</span>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 text-adventure-mist font-bold uppercase text-xs tracking-widest">
+                        Book Now</button>
+                </div>
+                <!-- Interceptor -->
+                <div
+                    class="bg-adventure-primary/20 border border-adventure-primary/30 p-4 hover:border-adventure-accent transition-all duration-500">
+                    <div class="aspect-[4/3] bg-black mb-6">
+                        <img src="public/bikes/interceptor-650.jpg" alt="Interceptor 650"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-adventure-mist mb-2 uppercase">Interceptor 650</h3>
+                    <p class="text-sm text-adventure-sage mb-6 italic">Pure twin-cylinder cruising power.</p>
+                    <div class="flex items-end justify-between border-t border-adventure-primary/30 pt-4">
+                        <span class="text-2xl font-bold text-adventure-accent">Rs. 2,500/day</span>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 text-adventure-mist font-bold uppercase text-xs tracking-widest">
+                        Book Now</button>
+                </div>
+                <!-- Xpulse -->
+                <div
+                    class="bg-adventure-primary/20 border border-adventure-primary/30 p-4 hover:border-adventure-accent transition-all duration-500">
+                    <div class="aspect-[4/3] bg-black mb-6">
+                        <img src="public/bikes/scram-411.jpg" alt="Xpulse 200" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-adventure-mist mb-2 uppercase">Hero Xpulse 200 4V</h3>
+                    <p class="text-sm text-adventure-sage mb-6 italic">The lightweight off-road champion.</p>
+                    <div class="flex items-end justify-between border-t border-adventure-primary/30 pt-4">
+                        <span class="text-2xl font-bold text-adventure-accent">Rs. 1,200/day</span>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 text-adventure-mist font-bold uppercase text-xs tracking-widest">
+                        Book Now</button>
+                </div>
+                <!-- Avenger -->
+                <div
+                    class="bg-adventure-primary/20 border border-adventure-primary/30 p-4 hover:border-adventure-accent transition-all duration-500">
+                    <div class="aspect-[4/3] bg-black mb-6">
+                        <img src="public/bikes/interceptor-650.jpg" alt="Avenger" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-adventure-mist mb-2 uppercase">Bajaj Avenger 220</h3>
+                    <p class="text-sm text-adventure-sage mb-6 italic">Comfortable cruising for long hours.</p>
+                    <div class="flex items-end justify-between border-t border-adventure-primary/30 pt-4">
+                        <span class="text-2xl font-bold text-adventure-accent">Rs. 1,200/day</span>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 text-adventure-mist font-bold uppercase text-xs tracking-widest">
+                        Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="experience" class="py-32 bg-adventure-bg/50 border-y border-adventure-primary/20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <div
+                        class="w-16 h-16 bg-adventure-primary/20 flex items-center justify-center mx-auto mb-6 border border-adventure-accent/30 rotate-45">
+                        <span class="text-2xl rotate-[-45deg] font-bold">Q</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-adventure-mist mb-4 uppercase">Best Quality Bikes</h3>
+                    <p class="text-adventure-sage">Meticulously maintained fleet for the ultimate mountain experience.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="w-16 h-16 bg-adventure-primary/20 flex items-center justify-center mx-auto mb-6 border border-adventure-accent/30 rotate-45">
+                        <span class="text-2xl rotate-[-45deg] font-bold">P</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-adventure-mist mb-4 uppercase">Lowest Price Guarantee</h3>
+                    <p class="text-adventure-sage">Best rental rates in Siliguri. Match guaranteed.</p>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="w-16 h-16 bg-adventure-primary/20 flex items-center justify-center mx-auto mb-6 border border-adventure-accent/30 rotate-45">
+                        <span class="text-2xl rotate-[-45deg] font-bold">G</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-adventure-mist mb-4 uppercase">Money Back Guarantee</h3>
+                    <p class="text-adventure-sage">Total peace of mind with our transparent refund policy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-24 bg-adventure-bg px-4 border-t border-adventure-primary/10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
+            <div>
+                <h4 class="text-adventure-accent font-black uppercase tracking-widest text-sm mb-8">Contact Us</h4>
+                <div class="space-y-4 text-adventure-mist/70">
+                    <p class="flex items-center gap-4"><span
+                            class="text-adventure-accent text-xs font-bold uppercase tracking-widest">Tel:</span>
+                        +91-8116915168</p>
+                    <p class="flex items-center gap-4"><span
+                            class="text-adventure-accent text-xs font-bold uppercase tracking-widest">Email:</span>
+                        siliguribikerental@gmail.com</p>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-adventure-accent font-black uppercase tracking-widest text-sm mb-8">Location</h4>
+                <p class="text-adventure-mist/70 leading-relaxed">
+                    Hakim Para, Siliguri, <br>
+                    West Bengal 734001
+                </p>
+            </div>
+            <div>
+                <h4 class="text-adventure-accent font-black uppercase tracking-widest text-sm mb-8">Adventure Starts
+                </h4>
+                <p class="text-adventure-mist/70 italic leading-relaxed">
+                    "One day you will wake up & there won’t be any more time to do the things you’ve always wanted. Do
+                    it now."
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-adventure-primary/10 text-center">
+            <p class="text-[10px] text-adventure-mist/30 uppercase tracking-[0.5em]">© 2024 Siliguri Bike Rental</p>
+        </div>
+    </footer>
+
+    <script>
+        const hero = document.getElementById('hero');
+        const heroImg = document.getElementById('heroImg');
+        const navbar = document.getElementById('navbar');
+
+        const frameCount = 76;
+        const frames = [];
+        for (let i = 1; i <= frameCount; i++) {
+            if (i === 2) continue; // Skip frame 002 as requested
+            const frameNum = i.toString().padStart(3, '0');
+            frames.push(`public/frames/ezgif-frame-${frameNum}.jpg`);
+        }
+
+        const effectiveFrameCount = frames.length;
+
+        // Preload images
+        frames.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        function render() {
+            const scrollPos = window.scrollY;
+            const maxScroll = hero.offsetHeight - window.innerHeight;
+            const progress = Math.min(Math.max(scrollPos / maxScroll, 0), 1);
+
+            // Navbar effect
+            if (scrollPos > 50) navbar.classList.add('nav-scrolled');
+            else navbar.classList.remove('nav-scrolled');
+
+            // Visual effects - Frame animation
+            const frameIndex = Math.min(
+                effectiveFrameCount - 1,
+                Math.floor(progress * effectiveFrameCount)
+            );
+            heroImg.src = frames[frameIndex];
+
+            // heroImg.style.transform = `scale(${1 + progress * 0.1})`; // Removed scale for frames
+            heroImg.style.opacity = progress > 0.95 ? 0.4 : 1;
+
+            // Section visibility
+            updateOpacity('section1', progress, 0, 0.15, 0.25);
+            updateOpacity('section2', progress, 0.3, 0.45, 0.55);
+            updateOpacity('section3', progress, 0.6, 0.75, 0.85);
+            updateOpacity('section4', progress, 0.9, 0.98, 1.0);
+        }
+
+        function updateOpacity(id, progress, start, peak, end) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            let opacity = 0;
+            if (progress >= start && progress <= peak) {
+                opacity = (progress - start) / (peak - start);
+            } else if (progress > peak && progress <= end) {
+                opacity = 1 - (progress - peak) / (end - peak);
+            } else if (progress > end && id === 'section4') {
+                opacity = 1;
+            }
+            el.style.opacity = opacity;
+        }
+
+        // Mouse movement for Spotlight and Parallax
+        const spotlight = document.getElementById('spotlight');
+        const section1Content = document.getElementById('section1Content');
+        const parallaxHeading = document.querySelector('.parallax-heading');
+        const topo = document.getElementById('topo');
+
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+
+            // Update spotlight
+            spotlight.style.setProperty('--x', `${x}%`);
+            spotlight.style.setProperty('--y', `${y}%`);
+
+            // Text parallax
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.05;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.05;
+            section1Content.style.transform = `translate(${moveX}px, ${moveY}px)`;
+
+            // Sub-parallax for heading
+            if (parallaxHeading) {
+                const headX = (e.clientX - window.innerWidth / 2) * 0.08;
+                parallaxHeading.style.transform = `translateX(${headX}px)`;
+            }
+
+            // Topo movement
+            topo.style.transform = `translate(${moveX * 0.2}px, ${moveY * 0.2}px)`;
+        });
+
+        window.addEventListener('scroll', render);
+        window.addEventListener('resize', render);
+        render(); // Init
+    </script>
+</body>
+
+</html>
