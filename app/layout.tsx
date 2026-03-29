@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-    title: 'Himalayan Rides | Ultimate Adventure Rentals',
+    title: 'GOA Beaches Rides | Ultimate Adventure Rentals',
     description: 'Premium motorcycle rentals and tours through the roof of the world.',
 };
 

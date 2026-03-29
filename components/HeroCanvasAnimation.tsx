@@ -198,7 +198,7 @@ export default function HeroCanvasAnimation() {
                             transition={{ duration: 1.5, ease: "easeOut" }}
                             className="block text-adventure-accent font-black uppercase mb-4 md:mb-6 drop-shadow-2xl text-[10px] md:text-xs text-nowrap md:text-wrap"
                         >
-                            Experience the Himalayas on Magical Two Wheels
+                            Experience the <span className="text-[#FFD700]">GOA</span> Beaches on Magical Two Wheels
                         </motion.span>
                         <h1 className="text-3xl md:text-9xl font-playfair font-black text-adventure-mist mb-6 md:mb-8 tracking-tighter uppercase leading-[0.9] md:leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] px-2">
                             The Great <br />
@@ -206,7 +206,7 @@ export default function HeroCanvasAnimation() {
                                 style={{ x: useTransform(smoothMouseX, [-0.5, 0.5], [-30, 30]) }}
                                 className="inline-block"
                             >
-                                Trans Himalaya
+                                Trans <span className="text-[#FFD700]">GOA</span> Beaches
                             </motion.span>
                             <br />
                             <span className="text-adventure-accent">Expedition</span>
